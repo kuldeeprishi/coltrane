@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tag Index</title>
+</head>
+<body>
+  <h1>Tag Index</h1>
+
+  {% for entry in object_list %}
+
+    <p> <a href="{{entry.get_absolute_url}}">{{entry.title}}</a> - {{entry.excerpt}}</p>
+  {% endfor %}
+</body>
+</html>

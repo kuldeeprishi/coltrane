@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}Weblog: {% endblock %}</title>
+	<style type="text/css">
+	body {
+		width: 600px;
+		margin: 0 auto;
+		border: 1px solid red;
+	}
+	#content, #sidebar {
+		height: auto;
+		min-height: 500px;
+		margin: 0;
+	}
+	#content {
+		float: left;
+		width: 400px;
+		border: 1px solid red;
+	}
+
+	#sidebar {
+		float: right;
+		width: 196px;
+		border: 1px solid red;
+	}
+
+	body.entries  #main-nav-entries {
+		background: skyblue;
+	}
+
+	body.links #main-nav-links {
+		background: skyblue;
+	}
+
+	}
+	</style>
+</head>
+<body class='{% block bodyclass %}{% endblock %}'>
+	<!-- Header of website -->
+	<div id="header">
+		<a href="/weblog/"><h1 id="branding">My Weblog</h1></a>
+		
+	</div>
+
+
+	<!-- Body of Website -->
+	<div id="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+
+
+	<!-- Sidebar -->
+	<div id="sidebar">
+		<h2>Navigation</h2>
+		<ul id="main-nav">
+			<li id="main-nav-entries">
+				<a href="{% url 'coltrane_entry_archive_index' %}">Entries</a>
+			</li>
+			<li id="main-nav-links">
+				<a href="{% url 'coltrane_link_archieve_index' %}">Links</a>
+			</li>
+			<li id="main-nav-categories">
+				<a href="{% url 'coltrane_category_list' %}">Categories</a>
+			</li>
+			<li id="main-nav-tags">
+				<a href="{% url 'coltrane_tag_list' %}">Tags</a>
+			</li>
+		</ul>
+		<h2>What is this?</h2>
+		{% block whatis %}
+		{% endblock %}
+		
+		{% load coltrane_tags %}
+		<h2>Latest Entries</h2>
+		<ul>
+			{% get_latest_content coltrane.entry 5 as latest_entries %}		
+			{% for entry in latest_entries %}
+				<li><a href="{{entry.get_absolute_url}}">{{entry.title}}</a> posted {{entry.pub_date|timesince}} ago.</li>
+			{% endfor %}
+		</ul>
+		
+		<h2>Latest Links</h2>
+		<ul>
+			{% get_latest_content coltrane.link 5 as latest_links %}		
+			{% for entry in latest_links %}
+				<li><a href="{{entry.get_absolute_url}}">{{entry.title}}</a> posted {{entry.pub_date|timesince}} ago.</li>
+			{% endfor %}
+
+			{% block sidebar %}
+			{% endblock %}
+		</ul>
+	</div>
+
+
+
+</body>
+</html>

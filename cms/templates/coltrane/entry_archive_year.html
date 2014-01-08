@@ -1,0 +1,18 @@
+{% extends 'base_entries.html' %}
+{% block title %}
+  {{block.super}} | {{year|date:"Y"}}
+{% endblock %}
+
+{% block content %}
+  {% for month in date_list %}
+  <li>
+    <a href="/weblog/{{year|date:"Y"}}/{{month|date:"b"}}/">{{month|date:"F"}}</a>
+  </li>
+{% endfor %}
+{% endblock %}
+
+{% block whatis %}
+  <p>This is a list of months in {{year|date:"Y"}} in which i published entries in my blog.</p>
+{% endblock %}
+
+

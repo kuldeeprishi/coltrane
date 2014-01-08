@@ -1,0 +1,31 @@
+{% extends 'base_entries.html' %}
+
+{% block title %}
+  {{block.super}} - in {{month|date:"F, Y"}}
+{% endblock %}
+
+{% block content %}
+  
+  {% for entry in object_list %}
+    <h2>{{entry.title}}</h2>
+    <p>Published on: {{entry.pub_date|date:"F j, Y"}}</p>
+    {% if entry.excerpt_html %}
+      {{entry.excerpt_html|safe}}
+    {% else %}
+      {{entry.body_html|truncatewords_html:"50"|safe}}
+    {% endif %}
+    <p> <a href="{{entry.get_absolute_url}}">Read full entry</a> </p>
+  {% endfor %}
+  <p>
+      {% if previous_month %}
+          Previous Month: <a href="../{{ previous_month|date:"b" }}/">{{ previous_month|date:"F Y" }}</a>
+      {% endif %}
+      {% if next_month %}
+          Next Month: <a href="../{{ next_month|date:"b" }}/">{{ next_month|date:"F Y" }}</a>
+      {% endif %}
+  </p>
+{% endblock %}
+
+{% block whatis %}
+  <p>This is a list of entires published in my blog in {{month|date:"F, Y"}}.</p>
+{% endblock %}

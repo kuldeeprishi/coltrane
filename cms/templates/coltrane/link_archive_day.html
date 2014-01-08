@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Link Index</title>
+</head>
+<body>
+  <h1>Link Index</h1>
+  {% for entry in object_list %}
+    <h2>{{entry.title}}</h2>
+    <p>Published on: {{entry.pub_date|date:"F j, Y"}}</p>
+    {% if entry.description_html %}
+      {{entry.description_html|safe}}
+    {% endif %}
+    <p> <a href="{{entry.get_absolute_url}}">Read full entry</a> </p>
+  {% endfor %}
+</body>
+</html>

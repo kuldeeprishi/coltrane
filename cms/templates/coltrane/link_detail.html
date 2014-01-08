@@ -1,0 +1,29 @@
+{% extends "base_links.html" %}
+
+{% block title %}
+	{{ block.super}} {{object.title}}
+{% endblock %}
+
+{% block bodyclass %}
+	links
+{% endblock %}
+
+{% block content %}
+  URL at : {{object.url}}
+
+  {% if object.description_html %}
+      {{object.description_html|safe}}
+  {% endif %}
+  <p>By - {{object.via_name}} on {{object.via_url}}</p>
+
+  <p>Published on: {{object.pub_date|date:"F j, Y"}}</p>
+
+
+  {{object.body_html|truncatewords_html:"50"|safe}}
+
+{% endblock %}
+
+{% block whatis %}
+	to be updated
+{% endblock %}
+

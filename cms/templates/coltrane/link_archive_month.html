@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Link Index</title>
+</head>
+<body>
+  <h1>Link Index</h1>
+  {% for entry in object_list %}
+    <h2>{{entry.title}}</h2>
+    <p>Published on: {{entry.pub_date|date:"F j, Y"}}</p>
+    {% if entry.description_html %}
+      {{entry.description_html|safe}}
+    {% endif %}
+    <p> <a href="{{entry.get_absolute_url}}">Read full entry</a> </p>
+  {% endfor %}
+  <p>
+      {% if previous_month %}
+          Previous Month: <a href="../{{ previous_month|date:"b" }}/">{{ previous_month|date:"F Y" }}</a>
+      {% endif %}
+      {% if next_month %}
+          Next Month: <a href="../{{ next_month|date:"b" }}/">{{ next_month|date:"F Y" }}</a>
+      {% endif %}
+  </p>
+
+
+</body>
+</html>

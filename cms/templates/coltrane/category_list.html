@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Category Index</title>
+</head>
+<body>
+  <h1>Category Index</h1>
+  {% for entry in object_list %}
+
+    <p> <a href="{{entry.get_absolute_url}}/">{{entry.title}}</a>-{{entry.description}}</p>
+  {% endfor %}
+</body>
+</html>
